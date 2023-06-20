@@ -1,0 +1,42 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="main.master.cs" Inherits="EMS.main" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>
+        <asp:ContentPlaceHolder ID="title" runat="server">
+
+        </asp:ContentPlaceHolder>
+    </title>
+      
+    <link href="style.css" rel="stylesheet" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+
+    </asp:ContentPlaceHolder>
+      
+    
+
+    
+</head>
+<body>
+    <form id="form1" runat="server">
+
+         <ul>
+             <li><a href="SignUp.aspx">SignUp</a></li>
+             <li><a href="Login.aspx">Login</a></li>
+             <li><a href="InternationalProject.aspx">InternationalProject</a></li>
+                 <li><a href="EmployeePay.aspx">EmployeePay</a></li>
+               <li><a href="New Employee.aspx">New Employee</a></li>
+                 <li><a href="Home.aspx">Home</a></li>   
+         </ul>
+                 
+           <asp:ContentPlaceHolder ID="ContentBody" runat="server">
+           </asp:ContentPlaceHolder>
+
+        <div class="footer">
+        <h2>CopyRight@123</h2>
+    </div>
+    </form>
+</body>
+</html>

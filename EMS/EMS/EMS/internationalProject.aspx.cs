@@ -1,0 +1,102 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data.SqlClient;
+using System.Data;
+
+namespace EMS
+{
+    public partial class internationalProject : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            string connectionstr = @"Data Source=.;Initial Catalog=Data;                     Integrated Security=True";
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = connectionstr;
+            con.Open();
+            string commandstr = "Insert into head(ID, ProjectName, Programmer,CEO)" +
+                            " Values('" + Convert.ToInt32(TextBox1.Text) + "'," +
+                            "'" + TextBox2.Text + "','" + TextBox3.Text + "','" + TextBox4.Text + "') ";
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = commandstr;
+            cmd.Connection = con;
+            cmd.ExecuteNonQuery();
+            con.Close();
+            Display();
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            string pathstr = @"Data Source=.;Initial Catalog=Data;
+                                   Integrated Security=True";
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = pathstr;
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "Update head SET ProjectName='" + TextBox2.Text + "', Programmer='" + TextBox3.Text + "',CEO='" + TextBox4.Text + "' Where ID='" + Convert.ToInt32(TextBox1.Text) + "'";
+            cmd.Connection = con;
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+            Display();
+        }
+
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+            string pathstr = @"Data Source=.;Initial Catalog=Data;
+                                   Integrated Security=True";
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = pathstr;
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "Delete From head Where ID='" + Convert.ToInt32(TextBox1.Text) + "'";
+            cmd.Connection = con;
+            con.Open();
+            cmd.ExecuteNonQuery();
+            con.Close();
+            Display();
+        }
+
+        protected void Button4_Click(object sender, EventArgs e)
+        {
+            string connectionstr = @"Data Source=.;Initial Catalog=Data;
+                                   Integrated Security=True";
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = connectionstr;
+            con.Open();
+            SqlDataAdapter da = new SqlDataAdapter("Select *From head", con);
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            GridView1.DataSource = dt;
+            con.Close();
+            Display();
+        }
+        public void Display()
+        {
+            string connectionstr = @"Data Source=.;Initial Catalog=Data;
+                                   Integrated Security=True";
+            SqlConnection con = new SqlConnection();
+            con.ConnectionString = connectionstr;
+            con.Open();
+            SqlDataAdapter da = new SqlDataAdapter("Select *From head", con);
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            GridView1.DataSource = dt;
+            GridView1.DataBind();
+            con.Close();
+        }
+
+        protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Display();
+        }
+    }
+}
